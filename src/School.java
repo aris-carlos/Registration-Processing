@@ -25,7 +25,7 @@ public class School {
         while (input != null) {
             String[] data = input.split("\t");
             int grade = Integer.valueOf(data[3]);
-            students.add(new Student(data[0], data[1], data[2], grade, data[4]));
+            students.add(new Student(data[0].trim(), data[1].trim(), data[2].trim(), grade, data[4].trim()));
             input = MediaFile.readString();
         }
     }
@@ -34,7 +34,7 @@ public class School {
         MediaFile.setInputFile(file);
         String input = MediaFile.readString();
         while(input != null) {
-            submissions.add(input);
+            submissions.add(input.trim());
             input = MediaFile.readString();
         }
     }
@@ -98,17 +98,25 @@ public class School {
     public void markCardSubmitted(String studentID) {
         boolean valid = false;
         for(Student student : students) {
-            if(student.getID().equals(studentID)) {
+            if(student.getID().trim().equals(studentID.trim())) {
                 valid = true;
                 break;
             }
         }
         if(valid) {
-            submissions.add(studentID);
-            System.out.println("Card with ID " + studentID + " marked as submitted!");
-            MediaFile.setOutputFile(Main.submissionsFile);
-            for(String id : submissions) {
-                
+            int idx = submissions.indexOf(studentID);
+            System.out.println(idx);
+            if(submissions.indexOf(studentID) == -1) {
+                submissions.add(studentID);
+                MediaFile.setOutputFile(Main.submissionsFile);
+                for(String id : submissions) {
+                    MediaFile.writeString(id, "\t", true);
+                }
+                MediaFile.saveAndClose();
+                System.out.println("Card with ID " + studentID + " marked as submitted! (" + Main.submissionsFile + ".txt updated!)");
+                writeAllMissing("missingCards");
+            } else {
+                System.out.println("Student has already submitted their card!");
             }
         } else {
             System.out.println("No student found with the ID " + studentID);
@@ -120,7 +128,12 @@ public class School {
     public void removeCard(String studentID) {
         boolean removed = submissions.remove(studentID);
         if(removed) {
-            System.out.println("Card with ID " + studentID + " marked as unsubmitted!");
+            MediaFile.setOutputFile(Main.submissionsFile);
+            for(String id : submissions) {
+                MediaFile.writeString(id, "\t", true);
+            }
+            MediaFile.saveAndClose();
+            System.out.println("Card with ID " + studentID + " marked as unsubmitted! (" + Main.submissionsFile + ".txt updated!)");
         } else {
             System.out.println(studentID + " not found!");
         }
@@ -130,4 +143,8 @@ public class School {
         return students;
     }
     //Add other methods as needed to create the desired output
+
+    public ArrayList<String> getSubmissions() {
+        return submissions;
+    }
 }

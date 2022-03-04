@@ -29,12 +29,15 @@ public class Main {
                     school.provideSummary();
                     break;
                 case 3:
+                    
                     printOptions2();
                     int status = scan.nextInt();
                     if(status == 1) {
+                        System.out.println("Please provide student ID:");
                         String id = scan.next();
                         school.markCardSubmitted(id);
                     } else if(status == 2) {
+                        System.out.println("Please provide student ID:");
                         String id = scan.next();
                         school.removeCard(id);
                     } else {
@@ -44,6 +47,8 @@ public class Main {
                 case 4:
                     break;
                 case 5:
+                    break;
+                case 6:
                     break;
                 default:
                     System.out.println("Not a valid option! Please select again!");
@@ -61,10 +66,11 @@ public class Main {
     public static void printOptions() {
         System.out.println("What would you like to do?  (-1 to end)");
         System.out.println("1) See list of all missing registration forms");
-        System.out.println("2) Print a summary of missing registration cards by grade level");
+        System.out.println("2) See a summary of missing registration cards by grade level");
         System.out.println("3) Change the status of a registration card");
         System.out.println("4) Withdraw a student from school");
-        System.out.println("5) Sort list by student last name");
+        System.out.println("5) Print a list of students missing by CAP Teacher");
+        System.out.println("6) Sort list by student last name");
     }
 
     private static void printOptions2() {
