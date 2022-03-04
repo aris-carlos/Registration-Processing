@@ -4,11 +4,14 @@ import java.util.ArrayList;
 public class Main {
     public static String studentMasterFile;
     public static String submissionsFile;
+    public static String missingCardsFile;
+    public static String summaryFile;
+    public static Scanner scan = new Scanner(System.in);
     
     //This main method is NOT COMPLETE.  Add to it as needed
     public static void main(String[] args) {
 
-        Scanner scan = new Scanner(System.in);
+        
         System.out.println("Enter name of Student Master file:");
         studentMasterFile = scan.next();
         System.out.println("Enter name of Submissions file");
@@ -23,10 +26,12 @@ public class Main {
         while(choice != -1) {
             switch(choice) {
                 case 1:
-                    school.writeAllMissing("missingCards");
+                    setMissingCardsFile();
+                    school.writeAllMissing(missingCardsFile);
                     break;
                 case 2:
-                    school.provideSummary();
+                    setSummaryFile();
+                    school.provideSummary(summaryFile);
                     break;
                 case 3:
                     
@@ -77,6 +82,23 @@ public class Main {
         System.out.println("What would you like to do? (-1 to end)");
         System.out.println("1) Mark a card as submitted");
         System.out.println("2) Mark a card as unsubmitted");
+        
+    }
+
+    public static void setMissingCardsFile() {
+        if(missingCardsFile == null || missingCardsFile.isEmpty()) {
+            System.out.println("Please provide a file name to view stored results:");
+            missingCardsFile = scan.next();
+            System.out.println("File '" + missingCardsFile + "' will be used to store and view Missing Card results");
+        }
+    }
+
+    public static void setSummaryFile() {
+        if(summaryFile == null || summaryFile.isEmpty()) {
+            System.out.println("Please provide a file name to view stored results:");
+            summaryFile = scan.next();
+            System.out.println("File '" + summaryFile + "' will be used to store and view Grade Summary results");
+        }
     }
 
 }

@@ -69,8 +69,8 @@ public class School {
         System.out.println("Results saved in 'missingCards.txt'");
     }
 
-    public void provideSummary() {
-        MediaFile.setOutputFile("summary");
+    public void provideSummary(String file) {
+        MediaFile.setOutputFile(file);
         int[] submitted = new int[3];
         int[] missing = new int[3];
         for(Student student : students) {
@@ -114,7 +114,10 @@ public class School {
                 }
                 MediaFile.saveAndClose();
                 System.out.println("Card with ID " + studentID + " marked as submitted! (" + Main.submissionsFile + ".txt updated!)");
-                writeAllMissing("missingCards");
+                Main.setMissingCardsFile();
+                Main.setSummaryFile();
+                writeAllMissing(Main.missingCardsFile);
+                provideSummary(Main.summaryFile);
             } else {
                 System.out.println("Student has already submitted their card!");
             }
@@ -134,8 +137,26 @@ public class School {
             }
             MediaFile.saveAndClose();
             System.out.println("Card with ID " + studentID + " marked as unsubmitted! (" + Main.submissionsFile + ".txt updated!)");
+            Main.setMissingCardsFile();
+            Main.setSummaryFile();
+            writeAllMissing(Main.missingCardsFile);
+            provideSummary(Main.summaryFile);
         } else {
             System.out.println(studentID + " not found!");
+        }
+    }
+
+    public void withdrawStudent(String studentID) {
+        for(Student student : students) {
+            if(student.getID() == studentID) {
+                System.out.println(student);
+                System.out.println("Confirm student's withdrawal from the school?");
+                String confirm = Main.scan.next();
+                if(confirm.equals("yes")) {
+
+                }
+                
+            }
         }
     }
     
