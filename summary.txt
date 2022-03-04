@@ -1,0 +1,10 @@
+Grade 9 - Total Students: 56
+Submitted: 44
+Missing: 12
+Grade 10 - Total Students: 65
+Submitted: 47
+Missing: 18
+Grade 11 - Total Students: 52
+Submitted: 38
+Missing: 14
+Total Missing Cards: 44
