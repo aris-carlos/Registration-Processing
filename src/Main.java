@@ -50,8 +50,12 @@ public class Main {
                     }
                     break;
                 case 4:
+                    System.out.println("Please provide student ID:");
+                    String id = scan.next();
+                    school.withdrawStudent(id);
                     break;
                 case 5:
+                    school.printMissingByTeacher();
                     break;
                 case 6:
                     break;
@@ -87,7 +91,7 @@ public class Main {
 
     public static void setMissingCardsFile() {
         if(missingCardsFile == null || missingCardsFile.isEmpty()) {
-            System.out.println("Please provide a file name to view stored results:");
+            System.out.println("Please provide a file name to view stored Missing Cards results:");
             missingCardsFile = scan.next();
             System.out.println("File '" + missingCardsFile + "' will be used to store and view Missing Card results");
         }
@@ -95,10 +99,9 @@ public class Main {
 
     public static void setSummaryFile() {
         if(summaryFile == null || summaryFile.isEmpty()) {
-            System.out.println("Please provide a file name to view stored results:");
+            System.out.println("Please provide a file name to view stored Summary results:");
             summaryFile = scan.next();
             System.out.println("File '" + summaryFile + "' will be used to store and view Grade Summary results");
         }
     }
-
 }

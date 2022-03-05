@@ -44,11 +44,24 @@ public class School {
      * A scanner is used to ask the user the name of the teacher
      */
     public void printMissingByTeacher() {
-        Scanner scan = new Scanner(System.in);
         System.out.println("What teacher's class would you like to print?");
-        String input  = scan.next();
-
-
+        String input  = Main.scan.next();
+        String teacher = "";
+        int grade = 0;
+        for(Student student : students) {
+            if(student.getTeacher().trim().indexOf(input.trim()) >= 0) {
+                teacher = student.getTeacher();
+                grade = student.getGrade();
+                break;
+            }
+        }
+        
+        System.out.println("Students with missing cards with CAP Teacher: " + teacher + " - Grade: " + grade);
+        for(Student student : students) {
+            if(student.getTeacher().equals(teacher)) {
+                System.out.println(student.getID() + "\t" + student.getLastName() + "\t" + student.getFirstName());
+            }
+        }
         
     }
 
@@ -148,16 +161,35 @@ public class School {
 
     public void withdrawStudent(String studentID) {
         for(Student student : students) {
-            if(student.getID() == studentID) {
+            if(student.getID().trim().equals(studentID.trim())) {
                 System.out.println(student);
-                System.out.println("Confirm student's withdrawal from the school?");
+                System.out.println("Confirm student's withdrawal from the school? (Type 'yes' to confirm)");
                 String confirm = Main.scan.next();
                 if(confirm.equals("yes")) {
-
+                    students.remove(student);
+                    System.out.println("Student (ID: " + studentID + ") has been withdrawn from the school");
+                    writeToMaster();
+                    System.out.println("Master Student file '" + Main.studentMasterFile + ".txt' updated!");
+                    break;
+                } else {
+                    System.out.println("Canceled!");
+                    break;
                 }
-                
             }
         }
+    }
+
+    public void writeToMaster() {
+        MediaFile.setOutputFile(Main.studentMasterFile);
+        for(Student student : students) {
+            String grade = "" + student.getGrade();
+            MediaFile.writeString(student.getID(), "\t", false);
+            MediaFile.writeString(student.getLastName(), "\t", false);
+            MediaFile.writeString(student.getFirstName(), "\t", false);
+            MediaFile.writeString(grade, "\t", false);
+            MediaFile.writeString(student.getTeacher(), "\t", true);
+        }
+        MediaFile.saveAndClose();
     }
     
     public ArrayList<Student> getStudents() {
