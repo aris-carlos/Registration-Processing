@@ -1,14 +1,15 @@
 public class Student {
+    //This is the student class, where each data value of a student stored in the studentMaster text file is stored in a Student object
     private String studentID;
     private String lastName;
     private String firstName;
     private int studentGrade;
     private String capTeacher;
 
-    public Student(String id, String last, String first, int grade, String tchr) {
+    public Student(String id, String first, String last, int grade, String tchr) {
         studentID = id;
-        lastName = last;
         firstName = first;
+        lastName = last;
         studentGrade = grade;
         capTeacher = tchr;
     }

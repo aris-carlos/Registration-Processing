@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Main {
     public static String studentMasterFile;
@@ -8,23 +7,19 @@ public class Main {
     public static String summaryFile;
     public static Scanner scan = new Scanner(System.in);
     
-    //This main method is NOT COMPLETE.  Add to it as needed
     public static void main(String[] args) {
-
-        
         System.out.println("Enter name of Student Master file:");
         studentMasterFile = scan.next();
         System.out.println("Enter name of Submissions file");
         submissionsFile = scan.next();
-        School school = new School();  //Modify this line as needed
-        school.importData(studentMasterFile);
+        School school = new School();  
+        school.importData(studentMasterFile); //Importing data from files
         school.importSubmissions(submissionsFile);
-
 
         printOptions();
         int choice = scan.nextInt();
         while(choice != -1) {
-            switch(choice) {
+            switch(choice) { //Switch-case statement for checking what options have been selected
                 case 1:
                     setMissingCardsFile();
                     school.writeAllMissing(missingCardsFile);
@@ -34,7 +29,6 @@ public class Main {
                     school.provideSummary(summaryFile);
                     break;
                 case 3:
-                    
                     printOptions2();
                     int status = scan.nextInt();
                     if(status == 1) {
@@ -57,19 +51,16 @@ public class Main {
                 case 5:
                     school.printMissingByTeacher();
                     break;
-                case 6:
-                    break;
                 default:
                     System.out.println("Not a valid option! Please select again!");
                     break;
             }
-
-
-
             printOptions();
             choice = scan.nextInt();
         }
-
+        school.writeToMaster();
+        System.out.println("Updating Master Student file '" + studentMasterFile + ".txt'");
+        System.out.println("Master Student file '" + studentMasterFile + ".txt' updated!");
     }
 
     public static void printOptions() {
@@ -79,7 +70,6 @@ public class Main {
         System.out.println("3) Change the status of a registration card");
         System.out.println("4) Withdraw a student from school");
         System.out.println("5) Print a list of students missing by CAP Teacher");
-        System.out.println("6) Sort list by student last name");
     }
 
     private static void printOptions2() {
@@ -88,7 +78,9 @@ public class Main {
         System.out.println("2) Mark a card as unsubmitted");
         
     }
-
+    /**
+     * This method asks the user for a file name to view the missing cards if no file name was given
+     */
     public static void setMissingCardsFile() {
         if(missingCardsFile == null || missingCardsFile.isEmpty()) {
             System.out.println("Please provide a file name to view stored Missing Cards results:");
@@ -97,6 +89,9 @@ public class Main {
         }
     }
 
+    /**
+     * This method asks the user for a file name to view the summary if no file name was given
+     */
     public static void setSummaryFile() {
         if(summaryFile == null || summaryFile.isEmpty()) {
             System.out.println("Please provide a file name to view stored Summary results:");
