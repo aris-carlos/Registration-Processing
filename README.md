@@ -1,18 +1,15 @@
-## Getting Started
+## Registration Processing
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+A Java Program to perform tasks for school year registration. The following operations are supported:
+<ol>
+  <li>View a list of all missing registration forms</li>
+  <li>View a summary of missing registration cards by grade level</li>
+  <li>Change the status of a student's registration card</li>
+  <li>Withdraw a student from a school</li>
+  <li>Print a list of students missing by Career and Academic Planning (CAP) Teacher</li>
+</ol>
 
-## Folder Structure
+This program is for the `Registration Processing` Project for Advanced Placement (AP) Computer Science A.
 
-The workspace contains two folders by default, where:
+Source Code is contained in the `src` folder.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
